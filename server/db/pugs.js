@@ -15,7 +15,10 @@ const Pug = db.define('pugs', {
     defaultValue: '/default.png'
   },
   biography: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    validate: {
+      len: [0, 1000]
+    }
   }
 })
 
