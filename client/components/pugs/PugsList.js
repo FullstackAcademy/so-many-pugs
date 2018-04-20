@@ -9,7 +9,10 @@ const PugsList = ({pugs, paginate, page}) => (
     {
       pugs.map(pug => <PugItem key={pug.id} pug={pug} />)
     }
-    <div id='moar-pugs' className='row center-xy' onClick={() => paginate(page)}>More pugs!</div>
+    <div id='moar-pugs' className='column center-xy' onClick={() => paginate(page)}>
+      <span>More</span>
+      <span>pugs!</span>
+    </div>
   </ul>
 )
 
