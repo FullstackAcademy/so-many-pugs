@@ -8,6 +8,7 @@ const Navbar = () => (
     <Link to='/login'>Login</Link>
     <Link to='/signup'>Signup</Link>
     <AuthLink to='/home'>Home</AuthLink>
+    <Link to='/pugs'>Pugs</Link>
     <AuthLink to='/'><Logout /></AuthLink>
   </nav>
 )

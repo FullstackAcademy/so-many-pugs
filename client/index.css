@@ -35,3 +35,9 @@ nav a:first-child:hover {
   width: 40px;
   border-radius: 50%;
 }
+
+#pug-detail img {
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+}

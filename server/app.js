@@ -18,5 +18,7 @@ app.get('/*', (req, res, next) => {
 // Error handling endware
 app.use((err, req, res, next) => {
   res.status(err.status || 500)
+  console.log(err.message)
+  console.log(err.stack)
   res.send(err.message || 'Internal server error')
 })
