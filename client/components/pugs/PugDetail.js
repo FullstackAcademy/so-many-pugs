@@ -3,10 +3,11 @@ import {fetchPug} from '../../store/pugs'
 import {connect} from 'react-redux'
 import Load from '../Load'
 
-const PugDetail = ({pug}) => (
+const PugDetail = ({pug = {}}) => (
   <div id='pug-detail'>
     <img src={pug.imageUrl} />
     <p>{pug.name}</p>
+    <p>{pug.biography}</p>
   </div>
 )
 

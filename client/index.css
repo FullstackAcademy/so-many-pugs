@@ -41,3 +41,28 @@ nav a:first-child:hover {
   height: 200px;
   border-radius: 5px;
 }
+
+#pugs-list {
+  max-width: 50%;
+}
+
+#moar-pugs {
+  min-height: 102px;
+  min-width: 82px;
+}
+
+#moar-pugs:hover {
+  cursor: pointer;
+  color: burlywood;
+}
+
+.pug-item:hover {
+  border: none;
+}
+
+.pug-item img {
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+  margin: 1em;
+}

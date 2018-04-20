@@ -5,14 +5,11 @@ import PugItem from './PugItem'
 import Load from '../Load'
 
 const PugsList = ({pugs, paginate, page}) => (
-  <ul className='column'>
+  <ul id='pugs-list' className='row wrap'>
     {
       pugs.map(pug => <PugItem key={pug.id} pug={pug} />)
     }
-    <button onClick={() => {
-      console.log('aaaah', page)
-      paginate(page)}
-    }>More pugs!</button>
+    <div id='moar-pugs' className='row center-xy' onClick={() => paginate(page)}>More pugs!</div>
   </ul>
 )
 

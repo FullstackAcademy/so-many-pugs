@@ -12,10 +12,11 @@ const seed = async () => {
     User.create({email: 'grace@hopper.com', password: '123', isAdmin: true})
   ])
   const pugs = await Promise.all([
-    Pug.create({name: 'Cody', imageUrl: '/cody.png'}),
-    Pug.create({name: 'Doug', imageUrl: '/doug.jpeg'}),
-    ...Array.from({length: 50}).map(() => Pug.create({
-      name: faker.name.firstName()
+    Pug.create({name: 'Cody', imageUrl: '/cody.png', biography: 'A cute pug'}),
+    Pug.create({name: 'Doug', imageUrl: '/doug.jpeg', biography: 'A famous pug'}),
+    ...Array.from({length: 500}).map(() => Pug.create({
+      name: faker.name.firstName(),
+      biography: faker.lorem.sentence()
     }))
   ])
   console.log(`seeded ${users.length} users`)

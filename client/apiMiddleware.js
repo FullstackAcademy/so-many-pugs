@@ -1,12 +1,12 @@
-const __cachedData = {}
+const _mem = {}
 
 const _cache = {
   get (url, method) {
-    return __cachedData[url] && __cachedData[url][method]
+    return _mem[url] && _mem[url][method]
   },
   set (url, method) {
-    __cachedData[url] = __cachedData[url] || {}
-    __cachedData[url][method] = true
+    _mem[url] = _mem[url] || {}
+    _mem[url][method] = true
   }
 }
 
@@ -29,6 +29,7 @@ export const createApiMiddleware = (ajax, history) => {
     } else if (cache) {
       _cache.set(api + JSON.stringify(config), method)
     }
+
     return ajax[method](api, config)
       .then(res => res.data)
       .then(payload => {

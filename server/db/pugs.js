@@ -13,12 +13,15 @@ const Pug = db.define('pugs', {
   imageUrl: {
     type: Sequelize.STRING,
     defaultValue: '/default.png'
+  },
+  biography: {
+    type: Sequelize.TEXT
   }
 })
 
 Pug.findPaginated = (page = 0) => {
   return Pug.findAll({
-    attributes: ['name', 'id'],
+    attributes: ['id', 'name', 'imageUrl'],
     limit: 10,
     order: [
       ['id']

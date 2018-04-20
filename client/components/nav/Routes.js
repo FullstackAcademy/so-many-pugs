@@ -1,9 +1,9 @@
 import React from 'react'
 import {Switch, Route} from 'react-router-dom'
-import {AuthRoute, Login, Signup} from './auth'
-import Home from './Home'
+import {Home} from '../user'
+import {AuthRoute, Login, Signup} from '../auth'
 import NoMatch from './NoMatch'
-import {PugsList, PugDetail} from './pugs'
+import {PugsList, PugDetail} from '../pugs'
 
 const Routes = () => (
   <div className='fill-xy center-xy column'>
