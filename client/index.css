@@ -49,6 +49,8 @@ nav a:first-child:hover {
 .pug-item {
   animation: appear;
   animation-duration: 1s;
+  height: 102px;
+  width: 82px;
 }
 
 #pug-detail img {
