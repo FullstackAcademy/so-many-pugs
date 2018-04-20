@@ -36,6 +36,21 @@ nav a:first-child:hover {
   border-radius: 50%;
 }
 
+@keyframes appear {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+#pug-detail {
+  animation: appear;
+  animation-duration: 1s;
+}
+
+.pug-item {
+  animation: appear;
+  animation-duration: 1s;
+}
+
 #pug-detail img {
   width: 200px;
   height: 200px;
