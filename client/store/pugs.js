@@ -8,54 +8,34 @@ const defaultPugs = {
   count: 0
 }
 
-const gotPugs = pugs => ({
+export const fetchPugs = () => ({
+  api: '/api/pugs',
+  method: 'get',
   type: GOT_PUGS,
-  pugs
+  error: 'ERROR',
+  cache: true
 })
 
-const gotPug = pug => ({
-  type: GOT_PUG,
-  pug
-})
-
-export const fetchPugs = () => (dispatch, _, {axios, cache}) => {
-  const api = '/api/pugs'
-  if (cache.get(api)) return
-  cache.set(api)
-  return axios.get(api)
-    .then(res => res.data)
-    .then(pugs => {
-      dispatch(gotPugs(pugs))
-    })
-}
-
-export const fetchPugsPaginated = () => (dispatch, getState, {axios, cache}) => {
-  const {count} = getState().pugs
-  const api = ['/api/pugs', {
+export const fetchPugsPaginated = (page = 0) => ({
+  api: '/api/pugs',
+  method: 'get',
+  type: GOT_PUGS,
+  config: {
     params: {
-      page: count
+      page
     }
-  }]
-  const apiStr = JSON.stringify(api)
-  if (cache.get(apiStr)) return
-  cache.set(apiStr)
-  return axios.get(...api)
-    .then(res => res.data)
-    .then(pugs => {
-      dispatch(gotPugs(pugs))
-    })
-}
+  },
+  error: 'ERROR',
+  cache: true
+})
 
-export const fetchPug = (pugId) => (dispatch, _, {axios, cache}) => {
-  const api = `/api/pugs/${pugId}`
-  if (cache.get(api)) return
-  cache.set(api)
-  return axios.get(api)
-    .then(res => res.data)
-    .then(pug => {
-      dispatch(gotPug(pug))
-    })
-}
+export const fetchPug = (pugId) => ({
+  api: `/api/pugs/${pugId}`,
+  method: 'get',
+  type: GOT_PUG,
+  error: 'ERROR',
+  cache: true
+})
 
 export default (state = defaultPugs, action) => {
   switch (action.type) {
@@ -63,17 +43,17 @@ export default (state = defaultPugs, action) => {
       return {
         ...state,
         byId: {
-          ...byId(action.pugs),
+          ...byId(action.payload),
           ...state.byId
         },
-        count: state.count + action.pugs.length
+        count: state.count + action.payload.length
       }
     case GOT_PUG:
       return {
         ...state,
         byId: {
           ...state.byId,
-          [action.pug.id]: action.pug
+          [action.payload.id]: action.payload
         }
       }
     default:

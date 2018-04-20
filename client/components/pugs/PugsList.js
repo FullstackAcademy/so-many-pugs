@@ -4,24 +4,28 @@ import {fetchPugs, fetchPugsPaginated} from '../../store/pugs'
 import PugItem from './PugItem'
 import Load from '../Load'
 
-const PugsList = ({pugs, paginate}) => (
+const PugsList = ({pugs, paginate, page}) => (
   <ul className='column'>
     {
       pugs.map(pug => <PugItem key={pug.id} pug={pug} />)
     }
-    <button onClick={paginate}>More pugs!</button>
+    <button onClick={() => {
+      console.log('aaaah', page)
+      paginate(page)}
+    }>More pugs!</button>
   </ul>
 )
 
 const mapState = state => {
   return {
-    pugs: Object.values(state.pugs.byId)
+    pugs: Object.values(state.pugs.byId),
+    page: state.pugs.count
   }
 }
 
 const mapDispatch = dispatch => ({
   load: () => dispatch(fetchPugs()),
-  paginate: () => dispatch(fetchPugsPaginated())
+  paginate: (page) => dispatch(fetchPugsPaginated(page))
 })
 
 export default connect(mapState, mapDispatch)(Load(PugsList))

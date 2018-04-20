@@ -1,19 +1,6 @@
-/*
- * {
- *   api: '/api/pugs',
- *   type: 'GOT_PUGS',
- *   error: 'GOT_ERROR'
- *   method: 'get',
- *   config: {}
- *   cache: true
- * }
- */
+const __cachedData = {}
 
-const __cachedData = {
-
-}
-
-const cache = {
+const _cache = {
   get (url, method) {
     return __cachedData[url] && __cachedData[url][method]
   },
@@ -23,22 +10,35 @@ const cache = {
   }
 }
 
-const createApiMiddleware = ajax => {
-  return store => action => next => {
-    if (action.api) {
-      if (action.cache && cache.get(action.api, action.method)) {
-        return
-      } else if (action.cache) {
-        cache.set(action.api, action.method)
-      }
-      return ajax[action.method](action.api, action.config)
-        .then(res => res.data)
-        .then(payload => {
-          next({type: action.type, payload})
-        })
-        .catch(error => {
-          next({type: action.error, error})
-        })
+export const createApiMiddleware = (ajax, history) => {
+  return store => next => action => {
+    const {
+      api,
+      method,
+      config,
+      cache,
+      type,
+      error,
+      redirect
+    } = action
+
+    if (!api) return next(action)
+
+    if (cache && _cache.get(api + JSON.stringify(config), method)) {
+      return
+    } else if (cache) {
+      _cache.set(api + JSON.stringify(config), method)
     }
+    return ajax[method](api, config)
+      .then(res => res.data)
+      .then(payload => {
+        next({type, payload})
+        if (redirect) {
+          history.push(redirect)
+        }
+      })
+      .catch(err => {
+        next({type: error, err})
+      })
   }
 }
