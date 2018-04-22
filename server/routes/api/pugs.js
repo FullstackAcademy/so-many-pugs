@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Pug} = require('../../db')
+const {isAdmin} = require('../..//gatekeepers')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -26,7 +27,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', isAdmin, async (req, res, next) => {
   try {
     const pug = await Pug.create(req.body)
     res.json(pug)

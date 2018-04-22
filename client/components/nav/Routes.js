@@ -12,7 +12,7 @@ const Routes = () => (
       <Route path='/login' component={Login} />
       <Route path='/signup' component={Signup} />
       <AuthRoute path='/home' component={Home} />
-      <Route path='/new-pug' component={NewPug} />
+      <AuthRoute path='/new-pug' component={NewPug} />
       <Route exact path='/pugs' component={PugsList} />
       <Route path='/pugs/:pugId' component={PugDetail} />
       <Route component={NoMatch} />
