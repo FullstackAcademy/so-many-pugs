@@ -35,3 +35,13 @@ router.post('/', isAdmin, async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:id', isAdmin, async (req, res, next) => {
+  try {
+    const pug = await Pug.findById(req.params.id)
+    const pupdated = await pug.update(req.body)
+    res.json(pupdated)
+  } catch (err) {
+    next(err)
+  }
+})

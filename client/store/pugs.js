@@ -49,6 +49,15 @@ export const addPug = (pug) => ({
   }
 })
 
+export const updatePug = (pugId, pug) => ({
+  api: `/api/pugs/${pugId}`,
+  method: 'put',
+  type: GOT_PUG,
+  error: 'ERROR',
+  cache: false,
+  config: pug
+})
+
 export default (state = defaultPugs, action) => {
   switch (action.type) {
     case GOT_PUGS:

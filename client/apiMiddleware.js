@@ -24,16 +24,18 @@ export const createApiMiddleware = (ajax, history) => {
 
     if (!api) return next(action)
 
-    if (cache && _cache.get(api + JSON.stringify(config), method)) {
-      return
-    } else if (cache) {
-      _cache.set(api + JSON.stringify(config), method)
+    const cached = _cache.get(api + JSON.stringify(config), method)
+    if (cache && cached) {
+      return Promise.resolve(cached)
     }
 
     return ajax[method](api, config)
       .then(res => res.data)
       .then(payload => {
         next({type, payload})
+        if (cache) {
+          _cache.set(api + JSON.stringify(config), method)
+        }
         if (success) {
           success({payload, ajax, history})
         }

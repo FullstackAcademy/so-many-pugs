@@ -1,13 +1,23 @@
 import React from 'react'
-import {fetchPug} from '../../store/pugs'
 import {connect} from 'react-redux'
+import {UpdatePug} from './PugForm'
+import {fetchPug} from '../../store/pugs'
+import {AuthRoute, AdminLink} from '../auth'
 import Load from '../Load'
 
 const PugDetail = ({pug = {}}) => (
   <div id='pug-detail'>
-    <img src={pug.imageUrl} />
-    <p>{pug.name}</p>
-    <p>{pug.biography}</p>
+    <div className='row'>
+      <div className='column'>
+        <img src={pug.imageUrl} />
+        <p>{pug.name}</p>
+        <p>{pug.biography}</p>
+        <AdminLink to={`/pugs/${pug.id}/update`}>Update Pug</AdminLink>
+      </div>
+      <div className='fill-xy'>
+        <AuthRoute path='/pugs/:pugId/update' component={UpdatePug} />
+      </div>
+    </div>
   </div>
 )
 
