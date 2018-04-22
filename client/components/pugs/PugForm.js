@@ -3,15 +3,15 @@ import {connect} from 'react-redux'
 import {Form, Input} from '../forms'
 import {addPug, updatePug} from '../../store/pugs'
 
-const PugForm = ({handleSubmit}) => (
+const PugForm = ({handleSubmit, defaults}) => (
   <Form onSubmit={handleSubmit}>
-    <Input type='text' label='Name' name='name' required />
-    <Input type='textarea' label='Biography' name='biography' required />
+    <Input type='text' label='Name' name='name' required defaultValue={defaults.name} />
+    <Input type='textarea' label='Biography' name='biography' required defaultValue={defaults.biography} />
     <button type='submit'>Submit</button>
   </Form>
 )
 
-const forAddPug = dispatch => ({
+const mapDispatchForAdd = dispatch => ({
   handleSubmit (evt) {
     evt.preventDefault()
     const name = evt.target.name.value
@@ -20,7 +20,11 @@ const forAddPug = dispatch => ({
   }
 })
 
-const forUpdatePug = (dispatch, ownProps) => ({
+const mapStateForUpdate = (state, ownProps) => ({
+  defaults: Object.values(state.pugs.byId).find(pug => pug.id === +ownProps.match.params.pugId)
+})
+
+const mapDispatchForUpdate = (dispatch, ownProps) => ({
   handleSubmit (evt) {
     evt.preventDefault()
     const name = evt.target.name.value
@@ -29,5 +33,5 @@ const forUpdatePug = (dispatch, ownProps) => ({
   }
 })
 
-export const AddPug = connect(null, forAddPug)(PugForm)
-export const UpdatePug = connect(null, forUpdatePug)(PugForm)
+export const AddPug = connect(null, mapDispatchForAdd)(PugForm)
+export const UpdatePug = connect(mapStateForUpdate, mapDispatchForUpdate)(PugForm)
