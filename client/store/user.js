@@ -18,7 +18,7 @@ export const auth = (credentials, method) => ({
   config: credentials,
   method,
   cache: false,
-  redirect: '/home'
+  success: ({history}) => history.push('/home')
 })
 
 export const logout = () => ({

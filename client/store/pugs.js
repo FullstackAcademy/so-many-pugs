@@ -37,6 +37,18 @@ export const fetchPug = (pugId) => ({
   cache: true
 })
 
+export const addPug = (pug) => ({
+  api: '/api/pugs',
+  method: 'post',
+  type: GOT_PUG,
+  error: 'ERROR',
+  cache: false,
+  config: pug,
+  success: ({payload, history}) => {
+    history.push(`/pugs/${payload.id}`)
+  }
+})
+
 export default (state = defaultPugs, action) => {
   switch (action.type) {
     case GOT_PUGS:

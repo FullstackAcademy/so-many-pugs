@@ -86,12 +86,18 @@ nav a:first-child:hover {
   max-width: 50%;
 }
 
-#moar-pugs {
+.pug-link {
   min-height: 102px;
   min-width: 82px;
+  text-decoration: none;
+  color: black;
 }
 
-#moar-pugs:hover {
+.pug-link:hover {
+  border: none;
+}
+
+.rainbow:hover {
   cursor: pointer;
   animation: rainbow;
   animation-duration: 1s;

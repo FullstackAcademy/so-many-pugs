@@ -25,3 +25,12 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  try {
+    const pug = await Pug.create(req.body)
+    res.json(pug)
+  } catch (err) {
+    next(err)
+  }
+})

@@ -19,7 +19,7 @@ export const createApiMiddleware = (ajax, history) => {
       cache,
       type,
       error,
-      redirect
+      success
     } = action
 
     if (!api) return next(action)
@@ -34,8 +34,8 @@ export const createApiMiddleware = (ajax, history) => {
       .then(res => res.data)
       .then(payload => {
         next({type, payload})
-        if (redirect) {
-          history.push(redirect)
+        if (success) {
+          success({payload, ajax, history})
         }
       })
       .catch(err => {
