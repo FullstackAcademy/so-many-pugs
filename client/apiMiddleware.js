@@ -15,33 +15,39 @@ export const createApiMiddleware = (ajax, history) => {
     const {
       api,
       method,
-      config,
-      cache,
-      type,
-      error,
-      success
+      body,
+      cache = false,
+      types,
+      success,
+      error
     } = action
 
     if (!api) return next(action)
 
-    const cached = _cache.get(api + JSON.stringify(config), method)
+    const cached = _cache.get(api + JSON.stringify(body), method)
     if (cache && cached) {
       return Promise.resolve(cached)
     }
 
-    return ajax[method](api, config)
+    const [LOADING, SUCCESS, ERROR] = types
+    store.dispatch({type: LOADING})
+
+    return ajax[method](api, body)
       .then(res => res.data)
       .then(payload => {
-        next({type, payload})
+        next({type: SUCCESS, payload})
         if (cache) {
-          _cache.set(api + JSON.stringify(config), method)
+          _cache.set(api + JSON.stringify(body), method)
         }
         if (success) {
-          success({payload, ajax, history})
+          return success({payload, ajax, history})
         }
       })
       .catch(err => {
-        next({type: error, err})
+        next({type: ERROR, err})
+        if (error) {
+          return error(err)
+        }
       })
   }
 }

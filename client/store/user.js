@@ -4,29 +4,24 @@ const REMOVE_USER = 'REMOVE_USER'
 const defaultUser = {}
 
 export const me = () => ({
-  type: GET_USER,
+  types: ['LOADING_USER', GET_USER, 'ERROR'],
   error: 'ERROR',
   api: '/auth',
-  method: 'get',
-  cache: false
+  method: 'get'
 })
 
 export const auth = (credentials, method) => ({
-  type: GET_USER,
-  error: 'ERROR',
+  types: ['LOADING_USER', GET_USER, 'ERROR'],
   api: '/auth/local',
-  config: credentials,
+  body: credentials,
   method,
-  cache: false,
   success: ({history}) => history.push('/home')
 })
 
 export const logout = () => ({
-  type: REMOVE_USER,
-  error: 'ERROR',
+  types: ['LOADING_USER', REMOVE_USER, 'ERROR'],
   api: '/auth',
-  method: 'delete',
-  cache: false
+  method: 'delete'
 })
 
 export default (state = defaultUser, action) => {

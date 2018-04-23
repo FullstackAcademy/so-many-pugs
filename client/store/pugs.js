@@ -11,7 +11,7 @@ const defaultPugs = {
 export const fetchPugs = () => ({
   api: '/api/pugs',
   method: 'get',
-  type: GOT_PUGS,
+  types: ['LOADING_PUGS', GOT_PUGS, 'ERROR'],
   error: 'ERROR',
   cache: true
 })
@@ -19,31 +19,27 @@ export const fetchPugs = () => ({
 export const fetchPugsPaginated = (page = 0) => ({
   api: '/api/pugs',
   method: 'get',
-  type: GOT_PUGS,
-  config: {
+  types: ['LOADING_PUGS', GOT_PUGS, 'ERROR'],
+  body: {
     params: {
       page
     }
   },
-  error: 'ERROR',
   cache: true
 })
 
 export const fetchPug = (pugId) => ({
   api: `/api/pugs/${pugId}`,
   method: 'get',
-  type: GOT_PUG,
-  error: 'ERROR',
+  types: ['LOADING_PUG', GOT_PUG, 'ERROR'],
   cache: true
 })
 
 export const addPug = (pug) => ({
   api: '/api/pugs',
   method: 'post',
-  type: GOT_PUG,
-  error: 'ERROR',
-  cache: false,
-  config: pug,
+  types: ['LOADING_PUG', GOT_PUG, 'ERROR'],
+  body: pug,
   success: ({payload, history}) => {
     history.push(`/pugs/${payload.id}`)
   }
@@ -52,10 +48,8 @@ export const addPug = (pug) => ({
 export const updatePug = (pugId, pug) => ({
   api: `/api/pugs/${pugId}`,
   method: 'put',
-  type: GOT_PUG,
-  error: 'ERROR',
-  cache: false,
-  config: pug
+  types: ['LOADING_PUG', GOT_PUG, 'ERROR'],
+  body: pug
 })
 
 export default (state = defaultPugs, action) => {
