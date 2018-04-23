@@ -1,17 +1,17 @@
+const LOADING_USER = 'LOADING_USER'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
 const defaultUser = {}
 
 export const me = () => ({
-  types: ['LOADING_USER', GET_USER, 'ERROR'],
-  error: 'ERROR',
+  types: [LOADING_USER, GET_USER, 'ERROR'],
   api: '/auth',
   method: 'get'
 })
 
 export const auth = (credentials, method) => ({
-  types: ['LOADING_USER', GET_USER, 'ERROR'],
+  types: [LOADING_USER, GET_USER, 'ERROR'],
   api: '/auth/local',
   body: credentials,
   method,
@@ -19,7 +19,7 @@ export const auth = (credentials, method) => ({
 })
 
 export const logout = () => ({
-  types: ['LOADING_USER', REMOVE_USER, 'ERROR'],
+  types: [LOADING_USER, REMOVE_USER, 'ERROR'],
   api: '/auth',
   method: 'delete'
 })

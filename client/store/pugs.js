@@ -1,6 +1,9 @@
 import {byId} from '../utils'
 
+const LOADING_PUGS = 'LOADING_PUGS'
 const GOT_PUGS = 'GOT_PUGS'
+
+const LOADING_PUG = 'LOADING_PUG'
 const GOT_PUG = 'GOT_PUG'
 
 const defaultPugs = {
@@ -11,7 +14,7 @@ const defaultPugs = {
 export const fetchPugs = () => ({
   api: '/api/pugs',
   method: 'get',
-  types: ['LOADING_PUGS', GOT_PUGS, 'ERROR'],
+  types: [LOADING_PUGS, GOT_PUGS, 'ERROR'],
   error: 'ERROR',
   cache: true
 })
@@ -19,7 +22,7 @@ export const fetchPugs = () => ({
 export const fetchPugsPaginated = (page = 0) => ({
   api: '/api/pugs',
   method: 'get',
-  types: ['LOADING_PUGS', GOT_PUGS, 'ERROR'],
+  types: [LOADING_PUGS, GOT_PUGS, 'ERROR'],
   body: {
     params: {
       page
@@ -31,14 +34,14 @@ export const fetchPugsPaginated = (page = 0) => ({
 export const fetchPug = (pugId) => ({
   api: `/api/pugs/${pugId}`,
   method: 'get',
-  types: ['LOADING_PUG', GOT_PUG, 'ERROR'],
+  types: [LOADING_PUG, GOT_PUG, 'ERROR'],
   cache: true
 })
 
 export const addPug = (pug) => ({
   api: '/api/pugs',
   method: 'post',
-  types: ['LOADING_PUG', GOT_PUG, 'ERROR'],
+  types: [LOADING_PUG, GOT_PUG, 'ERROR'],
   body: pug,
   success: ({payload, history}) => {
     history.push(`/pugs/${payload.id}`)
@@ -48,7 +51,7 @@ export const addPug = (pug) => ({
 export const updatePug = (pugId, pug) => ({
   api: `/api/pugs/${pugId}`,
   method: 'put',
-  types: ['LOADING_PUG', GOT_PUG, 'ERROR'],
+  types: [LOADING_PUG, GOT_PUG, 'ERROR'],
   body: pug
 })
 
