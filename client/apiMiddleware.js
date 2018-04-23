@@ -35,19 +35,21 @@ export const createApiMiddleware = (ajax, history) => {
     return ajax[method](api, body)
       .then(res => res.data)
       .then(payload => {
-        next({type: SUCCESS, payload})
+        const result = next({type: SUCCESS, payload})
         if (cache) {
           _cache.set(api + JSON.stringify(body), method)
         }
         if (success) {
           return success({payload, ajax, history})
         }
+        return result
       })
       .catch(err => {
-        next({type: ERROR, err})
+        const result = next({type: ERROR, err})
         if (error) {
           return error(err)
         }
+        return result
       })
   }
 }
