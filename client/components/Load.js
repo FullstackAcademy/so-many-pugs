@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Error from './Error'
 
 const Load = (OtherComponent) => class Loader extends Component {
   state = {
@@ -16,7 +17,7 @@ const Load = (OtherComponent) => class Loader extends Component {
     return loaded
       ? <OtherComponent {...this.props} />
       : error
-        ? <div>Oh noes!</div>
+        ? <Error error={error.message} />
         : <div>Loading...</div>
   }
 }
