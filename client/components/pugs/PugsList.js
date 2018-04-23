@@ -1,16 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {AdminLink} from '../auth'
+import {AuthLink} from '../auth'
 import {fetchPugs, fetchPugsPaginated} from '../../store/pugs'
 import PugItem from './PugItem'
 import Load from '../Load'
 
 const PugsList = ({pugs, paginate, page}) => (
   <ul id='pugs-list' className='row wrap'>
-    <AdminLink to='/new-pug' className='column center-xy rainbow pug-link'>
+    <AuthLink to='/new-pug' className='column center-xy rainbow pug-link' adminOnly>
       <span>Add</span>
       <span>pugs!</span>
-    </AdminLink>
+    </AuthLink>
     {
       pugs.map(pug => <PugItem key={pug.id} pug={pug} />)
     }

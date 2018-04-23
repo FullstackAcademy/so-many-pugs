@@ -3,10 +3,10 @@ import {Route, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import AuthPrompt from './AuthPrompt'
 
-const mapState = (state, ownProps) => {
+const mapState = (state, {adminOnly = false, ...rest}) => {
   return {
-    isLoggedIn: !!state.user.id,
-    ...ownProps
+    allowed: adminOnly ? state.user.isAdmin : !!state.user.id,
+    ...rest
   }
 }
 
@@ -14,8 +14,8 @@ const mapState = (state, ownProps) => {
 // it's a bit smarter. If the user isn't logged in (which
 // for our purposes means that state.user.id is a truthy value),
 // it will instead show a prompt for the user to login.
-export const AuthRoute = ({isLoggedIn, ...rest}) => {
-  return isLoggedIn
+export const AuthRoute = ({allowed, ...rest}) => {
+  return allowed
     ? <Route {...rest} />
     : <Route {...rest} component={AuthPrompt} />
 }

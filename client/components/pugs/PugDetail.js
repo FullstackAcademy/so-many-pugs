@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {UpdatePug} from './PugForm'
 import {fetchPug} from '../../store/pugs'
-import {AuthRoute, AdminLink} from '../auth'
+import {AuthRoute, AuthLink} from '../auth'
 import Load from '../Load'
 
 const PugDetail = ({pug = {}}) => (
@@ -12,7 +12,7 @@ const PugDetail = ({pug = {}}) => (
         <img src={pug.imageUrl} />
         <p>{pug.name}</p>
         <p>{pug.biography}</p>
-        <AdminLink to={`/pugs/${pug.id}/update`}>Update Pug</AdminLink>
+        <AuthLink to={`/pugs/${pug.id}/update`} adminOnly>Update Pug</AuthLink>
       </div>
       <div className='fill-xy'>
         <AuthRoute path='/pugs/:pugId/update' component={UpdatePug} />
