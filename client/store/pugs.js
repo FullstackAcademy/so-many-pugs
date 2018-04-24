@@ -15,7 +15,6 @@ export const fetchPugs = () => ({
   api: '/api/pugs',
   method: 'get',
   types: [LOADING_PUGS, GOT_PUGS, 'ERROR'],
-  error: 'ERROR',
   cache: true
 })
 
