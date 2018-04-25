@@ -6,6 +6,7 @@ const Load = (OtherComponent) => class Loader extends Component {
     loaded: false,
     error: false
   }
+
   componentDidMount () {
     this.props.load()
       .then(() => this.setState({loaded: true}))

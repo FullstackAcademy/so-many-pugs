@@ -1,4 +1,4 @@
-import {byId} from '../utils'
+import {keyBy} from '../utils'
 
 const LOADING_PUGS = 'LOADING_PUGS'
 const GOT_PUGS = 'GOT_PUGS'
@@ -60,7 +60,7 @@ export default (state = defaultPugs, action) => {
       return {
         ...state,
         byId: {
-          ...byId(action.payload),
+          ...keyBy(action.payload),
           ...state.byId
         },
         count: state.count + action.payload.length

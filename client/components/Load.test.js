@@ -21,6 +21,8 @@ describe('Load', () => {
   it('initializes loaded state to false', () => {
     const Loader = Load(Test)
     const wrapper = shallow(<Loader load={resolves} />)
+    console.log(wrapper.debug())
     expect(wrapper.state().loaded).to.equal(false)
+    expect(wrapper.find('Test').length).to.equal(0)
   })
 })
