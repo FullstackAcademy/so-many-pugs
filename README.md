@@ -1,5 +1,6 @@
 # Topics
 
+
 * Data normalization
 * Caching
 * API middleware
